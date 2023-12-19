@@ -6,9 +6,9 @@ export const formFields: FormField[] = [
     name: "personalInfo",
     label: "Personal Information",
     fields: [
-      { type: "input", name: "firstName", label: "First Name", inputType: "text" },
-      { type: "input", name: "lastName", label: "Last Name", inputType: "text" },
-      { type: "input", name: "email", label: "Email", inputType: "email" },
+      { type: "leaf", name: "firstName", label: "First Name", inputType: "text" },
+      { type: "leaf", name: "lastName", label: "Last Name", inputType: "text" },
+      { type: "leaf", name: "email", label: "Email", inputType: "email" },
     ],
   },
   {
@@ -20,11 +20,11 @@ export const formFields: FormField[] = [
     fields: [
       {
         type: "composite",
-        name: "primaryAddress",
+        name: "Dad's parents",
         label: "Primary Address",
         fields: [
-          { type: "input", name: "street", label: "Street", inputType: "text" },
-          { type: "input", name: "city", label: "City", inputType: "text" },
+          { type: "leaf", name: "street", label: "Street", inputType: "text" },
+          { type: "leaf", name: "city", label: "City", inputType: "text" },
           // More fields...
         ],
       },
@@ -33,8 +33,8 @@ export const formFields: FormField[] = [
         name: "secondaryAddress",
         label: "Secondary Address",
         fields: [
-          { type: "input", name: "secondaryStreet", label: "Street", inputType: "text" },
-          { type: "input", name: "secondaryCity", label: "City", inputType: "text" },
+          { type: "leaf", name: "secondaryStreet", label: "Street", inputType: "text" },
+          { type: "leaf", name: "secondaryCity", label: "City", inputType: "text" },
           // More fields...
         ],
       },
@@ -46,13 +46,13 @@ export const formFields: FormField[] = [
     label: "Preferences",
     fields: [
       {
-        type: "input",
+        type: "leaf",
         name: "newsletter",
         label: "Subscribe to Newsletter",
         inputType: "checkbox",
       },
       {
-        type: "input",
+        type: "leaf",
         name: "details",
         label: "Provide Details",
         inputType: "text",
@@ -62,7 +62,7 @@ export const formFields: FormField[] = [
       // Add more preferences...
     ],
   },
-  { type: "input", name: "submit", label: "Submit", inputType: "button" },
+  { type: "leaf", name: "submit", label: "Submit", inputType: "button" },
 ];
 
 // App implementation remains the same

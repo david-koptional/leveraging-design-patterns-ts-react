@@ -1,4 +1,3 @@
-import "./App.css";
 import { CompositeApp } from "./slides/composite-pattern";
 
 function App() {

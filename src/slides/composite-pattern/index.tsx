@@ -15,9 +15,11 @@ const FormBuilder: React.FC<{ fields: FormField[] }> = ({ fields }) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        {fields.map((field) => renderField(field, watch))}
-        <button type="submit">Submit</button>
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="w-[300px] flex flex-col gap-4 mx-auto"
+      >
+        {fields.map((field) => renderField(field, watch, 0))}
       </form>
     </FormProvider>
   );
