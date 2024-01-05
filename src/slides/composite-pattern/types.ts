@@ -4,6 +4,10 @@ interface FormElement {
   name: string;
   label: string;
   type: "composite" | "leaf";
+  options?:
+    | { label: string; value: string }[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    | ((formData: any) => { label: string; value: string }[]);
   condition?: (formData: unknown) => boolean;
 }
 
@@ -13,7 +17,7 @@ in the hierarchy.
 */
 export interface InputField extends FormElement {
   type: "leaf";
-  inputType: "text" | "email" | "password" | "checkbox" | "button" | "switch";
+  inputType: "text" | "email" | "password" | "checkbox" | "button" | "switch" | "select";
 }
 
 /* This is the composite. Typically, the composite has one to 'many' nodes (components). Again, like the leaf, the composite extends the base 

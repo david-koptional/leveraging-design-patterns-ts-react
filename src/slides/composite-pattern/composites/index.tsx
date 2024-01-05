@@ -14,15 +14,11 @@ export const FormComposite: React.FC<FormCompositeProps & { level: number }> = (
   watch,
   level,
 }) => {
+  // the operation is to render - returning JSX
   return (
     <fieldset>
-      <legend
-        className={cn(`flex flex-col gap-2 text-md`, {
-          "text-lg font-bold": level === 0,
-        })}
-      >
-        {field.label}
-      </legend>
+      <legend className={cn(`flex flex-col gap-2 text-md ml-[${level}px]`)}>{field.label}</legend>
+      {/* also calls renders the children */}
       {field.fields.map((f) => renderField(f, watch, (level = level + 1)))}
     </fieldset>
   );

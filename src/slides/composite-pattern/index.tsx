@@ -13,6 +13,10 @@ const FormBuilder: React.FC<{ fields: FormField[] }> = ({ fields }) => {
     console.log(data);
   };
 
+  const city = watch("city");
+
+  console.log(city);
+
   return (
     <FormProvider {...methods}>
       <form

@@ -1,10 +1,18 @@
 import { UseFormWatch, FieldValues } from "react-hook-form";
 import { FormComposite } from "./composites";
-import { ButtonField, CheckboxField, EmailField, SwitchField, TextField } from "./leaves";
+import {
+  ButtonField,
+  CheckboxField,
+  EmailField,
+  SelectField,
+  SwitchField,
+  TextField,
+} from "./leaves";
 import { FormField } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const renderField = (field: FormField, watch: UseFormWatch<FieldValues>, level: number) => {
+  // recursively apply method to everything in the hierarchy
   const shouldDisplay = field.condition ? field.condition(watch()) : true;
 
   if (!shouldDisplay) return null;
@@ -24,6 +32,8 @@ export const renderField = (field: FormField, watch: UseFormWatch<FieldValues>, 
           return <CheckboxField key={field.name} {...field} />;
         case "switch":
           return <SwitchField key={field.name} {...field} />;
+        case "select":
+          return <SelectField key={field.name} {...field} />;
       }
       break;
   }
