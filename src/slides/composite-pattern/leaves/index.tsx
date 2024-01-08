@@ -1,5 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { InputField } from "../types";
+import { InputField, MultiSelectField as MultiSelectFieldProps  } from "../types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -97,6 +97,50 @@ export const SelectField: React.FC<InputField> = ({ name, label, options }) => {
           </Select>
         )}
       />
+    </div>
+  );
+};
+
+export const MultiSelectField: React.FC<MultiSelectFieldProps> = ({ name, label, options }) => {
+  const { register } = useFormContext();
+  const { watch } = useFormContext();
+  const formData = watch();
+
+  const resolvedOptions = typeof options === "function" ? options(formData) : options;
+
+  return (
+    <div>
+      <Label htmlFor={name}>{label}</Label>
+      {resolvedOptions?.map((opt) => (
+        <div key={opt.value}>
+          <input type="checkbox" {...register(name)} value={opt.value} id={opt.value} />
+          <Label htmlFor={opt.value}>{opt.label}</Label>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// DetailedText Component
+export const DetailedTextField: React.FC<InputField> = ({ name, label }) => {
+  const { register } = useFormContext();
+
+  return (
+    <div>
+      <Label htmlFor={name}>{label}</Label>
+      <textarea id={name} {...register(name)} />
+    </div>
+  );
+};
+
+// UploadField Component
+export const UploadField: React.FC<InputField> = ({ name, label }) => {
+  const { register } = useFormContext();
+
+  return (
+    <div>
+      <Label htmlFor={name}>{label}</Label>
+      <input id={name} type="file" {...register(name)} />
     </div>
   );
 };

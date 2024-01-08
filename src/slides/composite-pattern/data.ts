@@ -1,80 +1,62 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormField } from "./types";
 
-const isValidEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-export const formFields: FormField[] = [
+export const projectDetailsFields: FormField[] = [
   {
     type: "composite",
-    name: "personalInfo",
-    label: "Personal Information",
-    fields: [
-      { type: "leaf", name: "firstName", label: "First Name", inputType: "text" },
-      { type: "leaf", name: "lastName", label: "Last Name", inputType: "text" },
-      { type: "leaf", name: "email", label: "Email", inputType: "email" },
-    ],
-  },
-  {
-    type: "composite",
-    name: "location",
-    label: "Location Information",
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    condition: (formData: any) =>
-      formData.firstName && formData.lastName && isValidEmail(formData.email),
+    name: "projectDetails",
+    label: "Project Details",
     fields: [
       {
         type: "composite",
-        name: "cityInfo",
-        label: "City Information",
+        name: "multiSelectOptions",
+        label: "Select Activities",
+        fields: [
+          { type: "leaf", name: "deliver", label: "Deliver", inputType: "checkbox" },
+          { type: "leaf", name: "receive", label: "Receive", inputType: "checkbox" },
+          { type: "leaf", name: "move", label: "Move", inputType: "checkbox" },
+        ],
+      },
+      {
+        type: "composite",
+        name: "deliveryDetails",
+        label: "Delivery Details",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        condition: (formData: any) => formData.deliver || formData.receive,
         fields: [
           {
             type: "leaf",
-            name: "city",
-            label: "City",
+            name: "timeOption",
+            label: "Time of Delivery",
             inputType: "select",
             options: [
-              { label: "New York", value: "New York" },
-              { label: "Los Angeles", value: "Los Angeles" },
-              { label: "Chicago", value: "Chicago" },
-              // Add more cities as needed
+              { label: "Business Hours", value: "businessHours" },
+              { label: "Overtime", value: "overtime" },
+              { label: "Double Time", value: "doubleTime" },
             ],
           },
           {
-            type: "composite",
-            name: "zipcodeInfo",
-            label: "Zip Code",
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            condition: (formData: any) => formData.city,
-            fields: [
-              {
-                type: "leaf",
-                name: "zipcode",
-                label: "Zip Code",
-                inputType: "select",
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                options: (formData: any) => {
-                  switch (formData.city) {
-                    case "New York":
-                      return [{ label: "10001", value: "10001" } /* More NY zip codes */];
-                    case "Los Angeles":
-                      return [{ label: "90001", value: "90001" } /* More LA zip codes */];
-                    case "Chicago":
-                      return [{ label: "60601", value: "60601" } /* More Chicago zip codes */];
-                    default:
-                      return [];
-                  }
-                },
-              },
+            type: "leaf",
+            name: "locationOption",
+            label: "Delivery Location",
+            inputType: "select",
+            options: [
+              { label: "Warehouse", value: "warehouse" },
+              { label: "Job Site", value: "jobSite" },
+              { label: "Direct To Site", value: "directToSite" },
+              // ... other locations
             ],
           },
         ],
       },
+      {
+        type: "leaf",
+        name: "moreInfo",
+        label: "Additional Information",
+        inputType: "detailed-text",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        condition: (formData: any) => formData.move,
+      },
+      // ... additional fields as per the diagram
     ],
   },
-  { type: "leaf", name: "submit", label: "Submit", inputType: "button" },
 ];
-
-// App implementation remains the same

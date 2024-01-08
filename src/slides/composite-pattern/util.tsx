@@ -7,10 +7,13 @@ import {
   SelectField,
   SwitchField,
   TextField,
+  // MultiSelectField,
+  // SingleSelectField, // Assuming you have created this component
+  DetailedTextField,
+  UploadField,
 } from "./leaves";
 import { FormField } from "./types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const renderField = (field: FormField, watch: UseFormWatch<FieldValues>, level: number) => {
   // recursively apply method to everything in the hierarchy
   const shouldDisplay = field.condition ? field.condition(watch()) : true;
@@ -34,6 +37,17 @@ export const renderField = (field: FormField, watch: UseFormWatch<FieldValues>, 
           return <SwitchField key={field.name} {...field} />;
         case "select":
           return <SelectField key={field.name} {...field} />;
+        // case "multi-select":
+        //   // Cast to MultiSelectField if needed
+        //   return <MultiSelectField key={field.name} {...(field as unknown as typeof MultiSelectField)} />;
+
+        // Cast to SingleSelectField if needed
+        // return <SingleSelectField key={field.name} {...(field as SingleSelectField)} />;
+        case "detailed-text":
+          return <DetailedTextField key={field.name} {...field} />;
+        case "file-upload":
+          return <UploadField key={field.name} {...field} />;
+        // Add additional cases as needed for other input types
       }
       break;
   }

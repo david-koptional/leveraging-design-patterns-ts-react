@@ -1,6 +1,6 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { formFields } from "./data";
+import { projectDetailsFields as formFields } from "./data";
 import { FormField } from "./types";
 import { renderField } from "./util";
 
